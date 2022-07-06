@@ -32,7 +32,7 @@ export default class Registrarse extends Component {
         style: 'error'
         });
     }else {
-      let InsertAPIURL = "https://maxbri.com.mx/App/Registrar.php";
+      let InsertAPIURL = "https://maxbri.com.mx/App/Actualizar.php";
 
       let headers = {
         'Accept': 'application/json',
