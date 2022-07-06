@@ -12,7 +12,7 @@ export default class App extends Component {
 
   fetchData= async()=>{
     id = await AsyncStorage.getItem('idc');
-    const response = await fetch('http://192.168.1.4/Proyecto/ListarViajes.php?idc=14');
+    const response = await fetch('https://maxbri.com.mx/App/ListarViajes.php?idc=14');
     const users = await response.json();
     this.setState({data: users});
 
