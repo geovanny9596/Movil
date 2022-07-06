@@ -25,14 +25,8 @@ export default class Registrarse extends Component {
  
  
 
-    if (Nombre.length === 0 || Apellidos.length ===0 || Domicilio.length === 0 || Celular.length === 0 || email.length === 0 ||usuario.length === 0  ||password.length === 0 ) {
-      Swal.showAlertWithOptions({  
-        title: 'Oops...',
-        subTitle: 'Se requieren tus datos',
-        style: 'error'
-        });
-    }else {
-      let InsertAPIURL = "https://maxbri.com.mx/App/Actualizar.php";
+  
+      let UpdateAPIURL = "https://maxbri.com.mx/App/Actualizar.php?idc=5";
 
       let headers = {
         'Accept': 'application/json',
@@ -49,7 +43,7 @@ export default class Registrarse extends Component {
         password: password
       };
 
-      fetch(InsertAPIURL, {
+      fetch(UpdateAPIURL, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(Data)
@@ -70,7 +64,7 @@ export default class Registrarse extends Component {
           style: 'error'
           });
       })
-    }
+  
   
   }
  
