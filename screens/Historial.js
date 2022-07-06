@@ -1,69 +1,30 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,FlatList,ScrollView} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState, useEffect } from 'react';
+import {Platform, StyleSheet, Text, View,FlatList,ScrollView,TouchableOpacity} from 'react-native';
 
+import axios from 'axios';
 
+function App() {
+  const [data, setData] = useState([]);
+  const {id} = useState([]);
 
-export default class App extends Component {
-  
-  state ={
-    data:[]
-  }
+  useEffect(async () => {
+    const result = await axios.get(
+      `https://maxbri.com.mx/App/ListarViajes?idc=${id}`,
+    ); 
 
-  fetchData= async()=>{
-    id = await AsyncStorage.getItem('idc');
-    const response = await fetch('https://maxbri.com.mx/App/ListarViajes.php?idc=14');
-    const users = await response.json();
-    this.setState({data: users});
+    setData(result.data);
+  }, []);
 
-  }
-componentDidMount(){
-  this.fetchData();
-}
-  render() {
-    return (
-      <View >
-
-       <FlatList
-       data={this.state.data}
-       keyExtractor={(item,index) => index.toString()}
-       renderItem={({item}) =>
-
-       <ScrollView>
-        <View style={style.ViewStyle}> 
-       <Text></Text>
-       <Text></Text>
-           
-
-                    <View style={style.header}>
-                       <Text></Text>
-                       {/**  <Text style={style.txtStyle}>Datos del Conductor</Text>
-                        <Text></Text>
-         
-                        <View style={{flexDirection: 'row'}}>
-                         <Text style={style.txtStyle2}>Nombre Completo:</Text>
-                         <Text style={style.txtStyle3}>{item.Nombre} {item.Apellidos}</Text>
-        </View>
-        <Text></Text>
-        <View style={{flexDirection: 'row'}}>
-                         <Text style={style.txtStyle2}> Color Del Vehiculo: </Text>
-                         <Text style={style.txtStyle3}>{this.state.Color} </Text>
-        </View>  
-        <Text></Text>      
-         <View style={{flexDirection: 'row'}}>
-                         <Text style={style.txtStyle2}>Marca y Modelo Del Vehiculo:</Text>
-                         <Text style={style.txtStyle3}>{this.state.MarcaYSubmarca} {this.state.Modelo}</Text>
-        </View>
-        <Text></Text>
-        <View style={{flexDirection: 'row'}}>
-                         <Text style={style.txtStyle2}>Placas del Placas:</Text>
-                         <Text style={style.txtStyle3}> {this.state.Placas} </Text>
-        </View>
-        <Text></Text>
-        <Text style={{ borderColor:'#444242',
-        marginBottom:1,
-        backgroundColor:'#444242'}}></Text> 
-    */}
+  return (
+    <View >
+          <ScrollView>
+ {data.map(item => (
+   <View style={style.ViewStyle} >
+    <Text></Text>
+    <Text></Text>
+<View style={style.header} key={item.Id_user}>
+<Text></Text>
+            
                         <Text style={style.txtStyle}>Datos del Viajes</Text>
                         <Text></Text>
                         <View style={{flexDirection: 'row'}}>
@@ -93,7 +54,7 @@ componentDidMount(){
         <Text></Text>
         <View style={{flexDirection: 'row'}}>
                          <Text style={style.txtStyle2}>Tarifa:</Text>
-                         <Text style={style.txtStyle3}>{ item.tarifa} </Text>
+                         <Text style={style.txtStyle3}>{ item.tarifa} MXM </Text>
 
                      
         </View>     
@@ -113,22 +74,17 @@ componentDidMount(){
         </View>  
         <Text></Text>
                     </View>
+            
 
-
-               
-       
-       
       </View>
-      </ScrollView>
-
-       }
-
-       />
-      </View>
-    );
-  }
+    ))}
+  
+    </ScrollView>
+   </View>
+  );
 }
-
+ 
+ 
 export const style = StyleSheet.create({
     ViewStyle: {
         flex: 1,
@@ -197,6 +153,9 @@ export const style = StyleSheet.create({
         fontSize:20,
         fontWeight:'bold'
     },
+    txt : {color:'#2C3E50', fontWeight:'bold', fontSize:20, position:'absolute', top:25},
+    btn_tch2 : {width:'75%', justifyContent:'center', marginTop:30},
+
     textListEdit:{
         color:'blue',
         marginRight:20
@@ -205,3 +164,4 @@ export const style = StyleSheet.create({
         color:'red'
     }
 })
+export default App;
