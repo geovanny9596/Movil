@@ -5,11 +5,10 @@ import axios from 'axios';
 
 function App() {
   const [data, setData] = useState([]);
-  const {id} = useState([]);
 
   useEffect(async () => {
     const result = await axios.get(
-      `https://maxbri.com.mx/App/ListarViajes?idc=${id}`,
+      'https://maxbri.com.mx/App/ListarViajes.php?idc=5',
     ); 
 
     setData(result.data);
