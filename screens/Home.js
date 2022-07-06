@@ -9,17 +9,30 @@ const Home = ({navigation}) => {
   const [nm, setName] = useState('');
 
   useEffect(() => {
-    getInfo('info').then((usr) => {
-      setName(usr.Nombre);
-    });      
+    getUser()
   },[]); 
 
-    return (
-        <View style={ style.vw }>
-          <Text style = { style.txt }>Bienvenido/a {nm} </Text>
-          <Image style={style.img} source={require('../assets/img/serviciotaxi.png')} resizeMode='contain' ></Image> 
-        </View>
-);
+
+  const getUser = async () => {
+    
+      //La funcion getInfo llama al local storage y trae el nombre y id del logueado
+      const data = await getInfo('info')
+      
+      //Siempre que llames un objeto { name: mario, lastname:Garcia }
+      //Usa el ? como se muestra abajo: data?.Nombre
+      //Asi si no existe la propieda Nombre el no se rompera la aplicacion
+      setName(data?.Nombre)
+      
+    
+  }
+  
+
+  return (
+      <View style={ style.vw }>
+        <Text style = { style.txt }>Bienvenido/a {nm} </Text>
+        <Image style={style.img} source={require('../assets/img/serviciotaxi.png')} resizeMode='contain' ></Image> 
+      </View>
+  );
 }
 
 const style = StyleSheet.create({
