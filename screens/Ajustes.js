@@ -14,7 +14,7 @@ export default class Registrarse extends Component {
   }
   
 
-  Register = ({navigation}) => {
+  Actualizar = ({navigation}) => {
     let Nombre = this.state.Nombre;
     let Apellidos = this.state.Apellidos;
     let Domicilio = this.state.Domicilio;
@@ -171,7 +171,7 @@ export default class Registrarse extends Component {
           
         <Button
           title={"Actualizar"}
-          onPress={this.Register}
+          onPress={this.Actualizar}
         />
         <Text></Text>
       </View>
